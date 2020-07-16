@@ -20,7 +20,7 @@ function App() {
 
   const [chosenPacks, setChosenPacks] = useState([] as number[]);
 
-  const [choices, setChoices] = useState([1, 12, 32] as number[]);
+  const [choices, setChoices] = useState([] as number[]);
 
   const draft3Packs = () => {
     const drafted = [];
