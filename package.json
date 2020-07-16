@@ -1,5 +1,6 @@
 {
   "name": "jumpstart",
+  "homepage": "https://nubleh.github.io/jumpstart",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
