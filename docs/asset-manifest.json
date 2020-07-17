@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/jumpstart/static/js/main.d740d2e2.chunk.js",
-    "main.js.map": "/jumpstart/static/js/main.d740d2e2.chunk.js.map",
+    "main.js": "/jumpstart/static/js/main.53534641.chunk.js",
+    "main.js.map": "/jumpstart/static/js/main.53534641.chunk.js.map",
     "runtime-main.js": "/jumpstart/static/js/runtime-main.02f46fa5.js",
     "runtime-main.js.map": "/jumpstart/static/js/runtime-main.02f46fa5.js.map",
     "static/js/2.e3976be9.chunk.js": "/jumpstart/static/js/2.e3976be9.chunk.js",
     "static/js/2.e3976be9.chunk.js.map": "/jumpstart/static/js/2.e3976be9.chunk.js.map",
     "index.html": "/jumpstart/index.html",
-    "precache-manifest.6c898eea8a1b766f1d9f3fa91478e680.js": "/jumpstart/precache-manifest.6c898eea8a1b766f1d9f3fa91478e680.js",
+    "precache-manifest.03a4ce8bab85f7d04ce321534f7d4648.js": "/jumpstart/precache-manifest.03a4ce8bab85f7d04ce321534f7d4648.js",
     "service-worker.js": "/jumpstart/service-worker.js",
     "static/js/2.e3976be9.chunk.js.LICENSE.txt": "/jumpstart/static/js/2.e3976be9.chunk.js.LICENSE.txt",
     "static/media/506px-Jumpstart_Booster.png": "/jumpstart/static/media/506px-Jumpstart_Booster.a0c9a3d3.png"
@@ -15,6 +15,6 @@
   "entrypoints": [
     "static/js/runtime-main.02f46fa5.js",
     "static/js/2.e3976be9.chunk.js",
-    "static/js/main.d740d2e2.chunk.js"
+    "static/js/main.53534641.chunk.js"
   ]
 }
