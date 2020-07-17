@@ -1192,7 +1192,7 @@
         "Plains",
         "Plains",
         "Plains",
-        "Heavily Armed Plains"
+        "Heavily Armored Plains"
       ],
       "shortName": "HEAVILY ARMORED"
     },
@@ -1218,7 +1218,7 @@
         "Plains",
         "Plains",
         "Plains",
-        "Heavily Armed Plains"
+        "Heavily Armored Plains"
       ],
       "shortName": "HEAVILY ARMORED"
     },
@@ -1244,7 +1244,7 @@
         "Plains",
         "Plains",
         "Plains",
-        "Heavily Armed Plains"
+        "Heavily Armored Plains"
       ],
       "shortName": "HEAVILY ARMORED"
     },
@@ -1270,7 +1270,7 @@
         "Plains",
         "Plains",
         "Plains",
-        "Heavily Armed Plains"
+        "Heavily Armored Plains"
       ],
       "shortName": "HEAVILY ARMORED"
     },
@@ -1894,7 +1894,7 @@
         "Forest",
         "Forest",
         "Forest",
-        "Time to Feed Forest"
+        "Predatory Forest"
       ],
       "shortName": "PREDATORY"
     },
@@ -1920,7 +1920,7 @@
         "Forest",
         "Forest",
         "Forest",
-        "Time to Feed Forest"
+        "Predatory Forest"
       ],
       "shortName": "PREDATORY"
     },
@@ -1946,7 +1946,7 @@
         "Forest",
         "Forest",
         "Forest",
-        "Time to Feed Forest"
+        "Predatory Forest"
       ],
       "shortName": "PREDATORY"
     },
@@ -1972,7 +1972,7 @@
         "Forest",
         "Forest",
         "Forest",
-        "Time to Feed Forest"
+        "Predatory Forest"
       ],
       "shortName": "PREDATORY"
     },
@@ -2133,7 +2133,7 @@
       "shortName": "ROGUES"
     },
     {
-      "name": "ROGUE (2)",
+      "name": "ROGUES (2)",
       "cards": [
         "Corpse Traders",
         "Oona's Blackguard",
@@ -2289,7 +2289,7 @@
       "shortName": "SMASHING"
     },
     {
-      "name": "SPELLINGCASTING (1)",
+      "name": "SPELLCASTING (1)",
       "cards": [
         "Thermo-Alchemist",
         "Living Lightning",
@@ -2596,7 +2596,7 @@
         "Forest",
         "Forest",
         "Forest",
-        "Tree Hugging Forest"
+        "Tree-Hugging Forest"
       ],
       "shortName": "TREE-HUGGING"
     },
@@ -2622,7 +2622,7 @@
         "Forest",
         "Forest",
         "Forest",
-        "Tree Hugging Forest"
+        "Tree-Hugging Forest"
       ],
       "shortName": "TREE-HUGGING"
     },
@@ -2648,7 +2648,7 @@
         "Forest",
         "Forest",
         "Forest",
-        "Tree Hugging Forest"
+        "Tree-Hugging Forest"
       ],
       "shortName": "TREE-HUGGING"
     },
@@ -2674,7 +2674,7 @@
         "Forest",
         "Forest",
         "Forest",
-        "Tree Hugging Forest"
+        "Tree-Hugging Forest"
       ],
       "shortName": "TREE-HUGGING"
     },

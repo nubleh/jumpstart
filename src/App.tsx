@@ -57,7 +57,16 @@ function App() {
       return carry;
     }
     return [
-      ...nextDeck.cards,
+      ...nextDeck.cards.map(card => {
+        const matchingLand = lands.find(land => {
+          const variantName = `${nextDeck.shortName.toLowerCase()} ${land.toLowerCase()}`;
+          return variantName === card.toLowerCase();
+        });
+        if (matchingLand) {
+          return matchingLand;
+        }
+        return card;
+      }),
       ...carry,
     ];
   }, [] as string[]);
@@ -104,14 +113,15 @@ function App() {
           {deckName} ({deck.length} cards)
         </div>
         {deck.map((card, i) => {
+          const url = card.indexOf('http') === -1 ? `${imgPath}${card}` : card;
           return <a
-          href={`${linkPath}${card}`}
-          rel="noopener"
-          target="_blank"
-          key={`${card}-${i}`}
-        >
+            href={`${linkPath}${card}`}
+            rel="noopener"
+            target="_blank"
+            key={`${card}-${i}`}
+          >
             <Card>
-              <img src={`${imgPath}${card}`}/>
+              <img src={url}/>
             </Card>
           </a>;
         })}
