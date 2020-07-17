@@ -176,6 +176,27 @@ function App() {
         </Switch>
         <button onClick={draft3Packs}>Reveal 3 Packs</button>
         <button onClick={resetPacks}>Reset</button>
+        <a
+          href='https://magic.wizards.com/en/articles/archive/feature/jumpstart-decklists-2020-06-18'
+          rel='noopener'
+          target='_blank'
+        >
+          decklist came from here
+        </a>
+        <a
+          href='https://magic.wizards.com/en/articles/archive/news/jumpstart-cards-being-replaced-mtg-arena-2020-06-17'
+          rel='noopener'
+          target='_blank'
+        >
+          arena replacements here
+        </a>
+        <a
+          href='https://github.com/nubleh/jumpstart'
+          rel='noopener'
+          target='_blank'
+        >
+          source available on github
+        </a>
         {choices.length > 0 && <Choices>
           {choices.map((i, k) => {
             const deck = data[i];
@@ -266,6 +287,12 @@ const Main = styled.div`
 
   button {
     cursor: pointer;
+  }
+
+  a {
+    color: #fff;
+    margin-left: 20px;
+    font-size: 12px;
   }
 `;
 
