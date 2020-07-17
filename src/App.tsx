@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 import decklist from './data/decklist.json';
 import boosterImg from './506px-Jumpstart_Booster.png';
@@ -67,12 +67,35 @@ const idMap: { [key: string]: number } = {
   'Island': 488464,
 };
 
+const arenaAlts: { [key: string]: string } = {
+  'Chain Lightning': 'Lightning Strike',
+  'Lightning Bolt': 'Lightning Strike',
+  'Ball Lightning': 'Lightning Serpent',
+  'Ajani\'s Chosen': 'Archon of Sun\'s Grace',
+  'Angelic Arbiter': 'Serra\'s Guardian',
+  'Draconic Roar': 'Scorching Dragonfire',
+  'Goblin Lore': 'Goblin Oriflamme',
+  'Flametongue Kavu': 'Fanatic of Mogis',
+  'Exhume': 'Bond of Revival',
+  'Fa\'adiyah Seer': 'Dryad Greenseeker',
+  'Mausoleum Turnkey': 'Audacious Thief',
+  'Path to Exile': 'Banishing Light',
+  'Read the Runes': 'Gadwick, the Wizened',
+  'Reanimate': 'Doomed Necromancer',
+  'Rhystic Study': 'Teferi\'s Ageless Insight',
+  'Sheoldred, Whispering One': 'Carnifex Demon',
+  'Scourge of Nel Toth': 'Woe Strider',
+  'Scrounging Bandar': 'Pollenbright Druid',
+  'Thought Scour': 'Weight of Memory',
+  'Time to Feed': 'Prey Upon'
+};
+
 function App() {
   const { data } = decklist;
 
   const [chosenPacks, setChosenPacks] = useState([] as number[]);
-
   const [choices, setChoices] = useState([] as number[]);
+  const [isArena, setIsArena] = useState(false);
 
   const draft3Packs = () => {
     const drafted = [];
@@ -119,7 +142,12 @@ function App() {
       //   }
       //   return card;
       // }),
-      ...nextDeck.cards,
+      ...nextDeck.cards.map(card => {
+        if (isArena && arenaAlts[card]) {
+          return arenaAlts[card];
+        }
+        return card;
+      }),
       ...carry,
     ];
   }, [] as string[]);
@@ -135,52 +163,41 @@ function App() {
     return carry.trim() + ' + ' + nextDeck.shortName;
   }, '');
 
+  const switchMode = () => {
+    setIsArena(!isArena);
+  };
+
   return (
     <Main>
-      {/* {data.map(d => {
-        return d.cards[d.cards.length - 1];
-      }).reduce((c, n) => {
-        if (c.indexOf(n) === -1) {
-          c.push(n);
-        }
-        return c;
-      }, []).sort((a, b) => {
-        const lastWords = [a, b].map(longName => {
-          const pieces = longName.split(/\s+/);
-          return pieces[pieces.length - 1];
-        });
-        return lastWords[0] > lastWords[1] ? 1 : -1;
-      }).map(card => {
-        return <div style={{display: 'inline-block'}}>
-          <Card>
-            <img src={getImagePath(card)}/>
-          </Card>
-          {card}
-        </div>;
-      })} */}
-      <button onClick={draft3Packs}>Reveal 3 Packs</button>
-      <button onClick={resetPacks}>Reset</button>
-      <Choices>
-        {choices.map((i, k) => {
-          const deck = data[i];
-          const frontCard = deck.cards.find(name => lands.indexOf(name) !== -1);
-          return <div
-            key={deck.name}
-            onClick={choosePack(i)}
-            style={{
-              animationDelay: `${k * 0.3}s`,
-            }}
-          >
-            <ChoiceName>
-              {deck.shortName}
-            </ChoiceName>
-            <Booster>
-              <img src={boosterImg}/>
-            </Booster>
-            {frontCard && <Card><img src={getImagePath(frontCard)}/></Card>}
-          </div>;
-        })}
-      </Choices>
+      <Controls>
+        <Switch active={isArena ? 2 : 1} onClick={switchMode}>
+          <span>Paper</span>
+          <span>Arena</span>
+        </Switch>
+        <button onClick={draft3Packs}>Reveal 3 Packs</button>
+        <button onClick={resetPacks}>Reset</button>
+        {choices.length > 0 && <Choices>
+          {choices.map((i, k) => {
+            const deck = data[i];
+            const frontCard = deck.cards.find(name => lands.indexOf(name) !== -1);
+            return <div
+              key={deck.name}
+              onClick={choosePack(i)}
+              style={{
+                animationDelay: `${k * 0.3}s`,
+              }}
+            >
+              <ChoiceName>
+                {deck.shortName}
+              </ChoiceName>
+              <Booster>
+                <img src={boosterImg}/>
+              </Booster>
+              {frontCard && <Card><img src={getImagePath(frontCard)}/></Card>}
+            </div>;
+          })}
+        </Choices>}
+      </Controls>
 
       {deck.length > 0 && <Deck>
         <div>
@@ -204,6 +221,45 @@ function App() {
     </Main>
   );
 }
+
+const Controls = styled.div`
+  position: fixed;
+  top: 0;
+  padding: 20px 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.3);
+  left: 0;
+  width: 100%;
+`;
+
+interface SwitchProps {
+  active: number;
+}
+const Switch = styled.div<SwitchProps>`
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+  margin: 0 16px;
+  user-select: none;
+
+  > span {
+    padding: 0 16px;
+    display: inline-block;
+    border-radius: 30px;
+    transition: background 0.2s;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  ${({ active }) => css`
+    > span:nth-child(${active}) {
+      background: rgba(0, 0, 0, 0.6);
+    }
+  `}
+`;
 
 const Main = styled.div`
   padding: 20px 40px;
@@ -297,7 +353,7 @@ const Choices = styled.div`
 `;
 
 const Deck = styled.div`
-  margin: 40px 0;
+  margin: 80px 0;
   ${Card} {
     display: inline-block;
 
