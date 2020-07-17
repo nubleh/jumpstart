@@ -7,6 +7,8 @@ import boosterImg from './506px-Jumpstart_Booster.png';
 
 const imgPath = 'https://gatherer.wizards.com/Handlers/Image.ashx?type=card&name=';
 const linkPath = 'https://gatherer.wizards.com/Pages/Search/Default.aspx?name=';
+const imgPathById = 'https://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=';
+const linkPathById = 'https://gatherer.wizards.com/Pages/Card/Details.aspx?printed=true&multiverseid=';
 const lands = [
   'Island',
   'Plains',
@@ -14,6 +16,56 @@ const lands = [
   'Swamp',
   'Forest',
 ];
+const idMap: { [key: string]: number } = {
+  'Wizards Island': 489631,
+  'Well-Read Island': 489637,
+  'Under the Sea Island': 489630,
+  'Spirits Island': 489635,
+  'Pirates Island': 489636,
+  'Milling Island': 489634,
+  'Archaeology Island': 489633,
+  'Above the Clouds Island': 489632,
+  'Rainbow Terramorphic Expanse': 489662,
+  'Walls Forest': 489659,
+  'Tree-Hugging Forest': 489654,
+  'Predatory Forest': 489660,
+  'Plus One Forest': 489656,
+  'Lands Forest': 489655,
+  'Elves Forest': 489661,
+  'Dinosaurs Forest': 489657,
+  'Cats Forest': 489658,
+  'Spellcasting Mountain': 489650,
+  'Smashing Mountain': 489651,
+  'Seismic Mountain': 489648,
+  'Minotaurs Mountain': 489653,
+  'Lightning Mountain': 489652,
+  'Goblins Mountain': 489649,
+  'Dragons Mountain': 489646,
+  'Devilish Mountain': 489647,
+  'Unicorns Plains': 489625,
+  'Legion Plains': 489622,
+  'Heavily Armored Plains': 489627,
+  'Feathered Friends Plains': 489628,
+  'Enchanted Plains': 489626,
+  'Dogs Plains': 489629,
+  'Doctor Plains': 489623,
+  'Angels Plains': 489624,
+  'Witchcraft Swamp': 489643,
+  'Vampires Swamp': 489644,
+  'Spooky Swamp': 489645,
+  'Rogues Swamp': 489641,
+  'Reanimated Swamp': 489640,
+  'Phyrexian Swamp': 489642,
+  'Minions Swamp': 489638,
+  'Discarding Swamp': 489639,
+
+  // plain ones
+  'Swamp': 488467,
+  'Plains': 488461,
+  'Forest': 488473,
+  'Mountain': 488470,
+  'Island': 488464,
+};
 
 function App() {
   const { data } = decklist;
@@ -57,16 +109,17 @@ function App() {
       return carry;
     }
     return [
-      ...nextDeck.cards.map(card => {
-        const matchingLand = lands.find(land => {
-          const variantName = `${nextDeck.shortName.toLowerCase()} ${land.toLowerCase()}`;
-          return variantName === card.toLowerCase();
-        });
-        if (matchingLand) {
-          return matchingLand;
-        }
-        return card;
-      }),
+      // ...nextDeck.cards.map(card => {
+      //   const matchingLand = lands.find(land => {
+      //     const variantName = `${nextDeck.shortName.toLowerCase()} ${land.toLowerCase()}`;
+      //     return variantName === card.toLowerCase();
+      //   });
+      //   if (matchingLand) {
+      //     return matchingLand;
+      //   }
+      //   return card;
+      // }),
+      ...nextDeck.cards,
       ...carry,
     ];
   }, [] as string[]);
@@ -84,6 +137,27 @@ function App() {
 
   return (
     <Main>
+      {/* {data.map(d => {
+        return d.cards[d.cards.length - 1];
+      }).reduce((c, n) => {
+        if (c.indexOf(n) === -1) {
+          c.push(n);
+        }
+        return c;
+      }, []).sort((a, b) => {
+        const lastWords = [a, b].map(longName => {
+          const pieces = longName.split(/\s+/);
+          return pieces[pieces.length - 1];
+        });
+        return lastWords[0] > lastWords[1] ? 1 : -1;
+      }).map(card => {
+        return <div style={{display: 'inline-block'}}>
+          <Card>
+            <img src={getImagePath(card)}/>
+          </Card>
+          {card}
+        </div>;
+      })} */}
       <button onClick={draft3Packs}>Reveal 3 Packs</button>
       <button onClick={resetPacks}>Reset</button>
       <Choices>
@@ -103,7 +177,7 @@ function App() {
             <Booster>
               <img src={boosterImg}/>
             </Booster>
-            <Card><img src={`${imgPath}${frontCard}`}/></Card>
+            {frontCard && <Card><img src={getImagePath(frontCard)}/></Card>}
           </div>;
         })}
       </Choices>
@@ -113,9 +187,10 @@ function App() {
           {deckName} ({deck.length} cards)
         </div>
         {deck.map((card, i) => {
-          const url = card.indexOf('http') === -1 ? `${imgPath}${card}` : card;
+          const url = card.indexOf('http') === -1 ? getImagePath(card) : card;
+          const link = idMap[card] ? `${linkPathById}${idMap[card]}` : `${linkPath}${card}`;
           return <a
-            href={`${linkPath}${card}`}
+            href={link}
             rel="noopener"
             target="_blank"
             key={`${card}-${i}`}
@@ -232,5 +307,12 @@ const Deck = styled.div`
     }
   }
 `;
+
+function getImagePath(card: string) {
+  if (idMap[card]) {
+    return `${imgPathById}${idMap[card]}`;
+  }
+  return `${imgPath}${card}`;
+}
 
 export default App;
